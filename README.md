@@ -45,7 +45,7 @@ console.log(idx); // -1
 
 ## Comparing two different types
 ---
-You can even make a comparator function that compares two different things (like a string and object).  Imagine you're trying to find an object that has a particular string as its ```name``` property.  You can just pass the string in as the value to find because you can do whatever you want in the comparator!  Any and all arrays will tremble at your uncanny ability to traverse them at O(log(n)) speeds!
+You can even make a comparator function that compares two different things (like a string and object).  Imagine you're trying to find an object that has a particular string as its ```name``` property.  You can just pass the string in as the value to find because you can do whatever you want in the comparator!  Any and all arrays (well...at least properly sorted arrays) will tremble at your uncanny ability to traverse them at O(log(n)) speeds!
 ```
 var arr = [
   {
