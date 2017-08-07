@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>QUnit tests for bin-search.js</title>
+  <link rel="stylesheet" href="https://code.jquery.com/qunit/qunit-2.4.0.css">
+</head>
+<body>
+  <div id="qunit"></div>
+  <div id="qunit-fixture"></div>
+  <script src="https://code.jquery.com/qunit/qunit-2.4.0.js"></script>
+  <script src="bin-search.js"></script>
+  <script>
+    QUnit.module("bin-search.js");
+    QUnit.test("Array.prototype.binarySearch sorted number array", function(assert) {
+      var arr = [-48, -3, 0, 4, 888];
+
+      // comparator function
+      function cmp(a, b) {
+        return a - b; // this is how the cool kids compare numbers
+      }
+
+      assert.equal(arr.binarySearch(-48, cmp), 0);
+      assert.equal(arr.binarySearch(-3, cmp), 1);
+      assert.equal(arr.binarySearch(0, cmp), 2);
+      assert.equal(arr.binarySearch(4, cmp), 3);
+      assert.equal(arr.binarySearch(888, cmp), 4);
+      assert.equal(arr.binarySearch(-49, cmp), -1);
+      assert.equal(arr.binarySearch(204, cmp), -1);
+      assert.equal(arr.binarySearch(1000, cmp), -1);
+    });
+    QUnit.test("Array.prototype.binarySearch sorted string array", function(assert) {
+      var arr = ["apple", "banana", "kiwi", "orange", "starfruit"];
+
+      // comparator function
+      function cmp(a, b) {
+        if (a == b) return 0;
+        if (a > b) return 1;
+        return -1;
+      }
+
+      assert.equal(arr.binarySearch("apple", cmp), 0);
+      assert.equal(arr.binarySearch("banana", cmp), 1);
+      assert.equal(arr.binarySearch("kiwi", cmp), 2);
+      assert.equal(arr.binarySearch("orange", cmp), 3);
+      assert.equal(arr.binarySearch("starfruit", cmp), 4);
+      assert.equal(arr.binarySearch("abe lincoln", cmp), -1);
+      assert.equal(arr.binarySearch("barista", cmp), -1);
+      assert.equal(arr.binarySearch("turnip...collard green", cmp), -1);
+    });
+    QUnit.test("Array.prototype.binarySearch sorted obj array", function(assert) {
+      var arr = [
+        {
+          "name": "Dat Boi",
+          "info": {}
+        },
+        {
+          "name": "Dis Boi",
+          "info": {}
+        },
+        {
+          "name": "Mad Boi",
+          "info": {}
+        },
+        {
+          "name": "Oh Boi",
+          "info": {}
+        },
+        {
+          "name": "Ya Boi",
+          "info": {}
+        }
+      ];
+
+      // comparator function
+      function cmp(nameToFind, arrObj) {
+        if (nameToFind == arrObj.name) return 0;
+        if (nameToFind > arrObj.name) return 1;
+        return -1;
+      }
+
+      assert.equal(arr.binarySearch("Dat Boi", cmp), 0);
+      assert.equal(arr.binarySearch("Dis Boi", cmp), 1);
+      assert.equal(arr.binarySearch("Mad Boi", cmp), 2);
+      assert.equal(arr.binarySearch("Oh Boi", cmp), 3);
+      assert.equal(arr.binarySearch("Ya Boi", cmp), 4);
+      assert.equal(arr.binarySearch("Batman", cmp), -1);
+      assert.equal(arr.binarySearch("Superman", cmp), -1);
+      assert.equal(arr.binarySearch("Zapdos", cmp), -1);
+    });
+  </script>
+</body>
+</html>
